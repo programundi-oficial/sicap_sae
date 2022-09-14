@@ -1,0 +1,27 @@
+{
+  "name": "com.sicapsolucoes.sae",
+  "displayName": "SAE",
+  "version": "1.0.0",
+  "description": "Sistema de avaliação da SICAP Soluções.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "SICAP Soluções",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "cordova-android": "^10.1.2",
+    "cordova-plugin-network-information": "^3.0.0"
+  },
+  "cordova": {
+    "platforms": [
+      "android"
+    ],
+    "plugins": {
+      "cordova-plugin-network-information": {}
+    }
+  }
+}

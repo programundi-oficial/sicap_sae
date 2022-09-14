@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="Responsive HTML Admin Dashboard Template based on Bootstrap 5">
+<meta name="author" content="NobleUI">
+<meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+<title>SICAP - SAE</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
+<!-- End fonts --> 
+
+<!-- core:css -->
+<link rel="stylesheet" href="assets/vendors/core/core.css">
+<!-- endinject --> 
+
+<!-- Plugin css for this page -->
+<link rel="stylesheet" href="assets/vendors/flatpickr/flatpickr.min.css">
+<!-- End plugin css for this page --> 
+
+<!-- inject:css -->
+<link rel="stylesheet" href="assets/fonts/feather-font/css/iconfont.css">
+<link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css">
+<!-- endinject --> 
+
+<!-- Layout styles -->
+<link rel="stylesheet" href="assets/css/demo1/style.min.css">
+<!-- End layout styles -->
+
+<link rel="shortcut icon" href="assets/images/favicon.png" />
+</head>
+<body class="sidebar-dark">
+<div class="main-wrapper">
+  <nav class="sidebar">
+    <div class="sidebar-header"> <a href="#" class="sidebar-brand"> SICAP <span>SAE</span> </a>
+      <div class="sidebar-toggler not-active"> <span></span> <span></span> <span></span> </div>
+    </div>
+    <div class="sidebar-body">
+      <ul class="nav">
+        <li class="nav-item nav-category">Menu</li>
+        <li class="nav-item"> 
+			<a href="index.html" class="nav-link"> 
+				<i class="link-icon" data-feather="box"></i> 
+				<span class="link-title">Tela Inicial</span> 
+			</a> 
+		</li>
+        <li class="nav-item nav-category">Configurações</li>
+		<li class="nav-item"> 
+			<a href="javascript:void(0);" class="nav-link"> 
+				<i class="me-2 link-icon" data-feather="upload-cloud"></i> 
+				<span class="link-title">Sicronização</span> 
+			</a> 
+		</li>
+        <li class="nav-item"> 
+			<a href="javascript:void(0);" class="nav-link"> 
+				<i class="me-2 link-icon" data-feather="user"></i> 
+				<span class="link-title">Perfil</span> 
+			</a> 
+		</li>
+        <li class="nav-item"> 
+			<a href="javascript:void(0);" onClick="trocar_estudante();" class="nav-link"> 
+				<i class="me-2 link-icon" data-feather="repeat"></i> 
+				<span class="link-title">Trocar de Estudante</span> 
+			</a> 
+		</li>
+        <li class="nav-item"> <a onClick="sair_app();" href="javascript:void(0);" class="nav-link"> <i class="me-2 link-icon" data-feather="log-out"></i> <span class="link-title">Sair da conta</span> </a> </li>
+      </ul>
+    </div>
+  </nav>
+  <nav class="settings-sidebar">
+    <div class="sidebar-body"> <a href="#" class="settings-sidebar-toggler"> <i data-feather="grid"></i> </a>
+      <h6 class="text-muted mb-2">Cadernos de Avaliação</h6>
+      <div class="mb-3 border-bottom"> </div>
+      <div class="theme-wrapper" style=" overflow: auto; height: 400px; ">
+        <div class="mb-3">
+          <h6 class="text-muted mb-2">Português</h6>
+          <a class="theme-item active" href=""> <img src="assets/images/screenshots/light.jpg" alt="light theme"> </a> </div>
+        <div class="mb-3">
+          <h6 class="text-muted mb-2">Matemática</h6>
+          <a class="theme-item" href=""> <img src="assets/images/screenshots/dark.jpg" alt="light theme"> </a> </div>
+        <div class="mb-3">
+          <h6 class="text-muted mb-2">Matemática</h6>
+          <a class="theme-item" href=""> <img src="assets/images/screenshots/dark.jpg" alt="light theme"> </a> </div>
+        <div class="mb-3">
+          <h6 class="text-muted mb-2">Matemática</h6>
+          <a class="theme-item" href=""> <img src="assets/images/screenshots/dark.jpg" alt="light theme"> </a> </div>
+      </div>
+    </div>
+  </nav>
+  <!-- partial -->
+  
+  <div class="page-wrapper">
+    <nav class="navbar"> <a href="#" class="sidebar-toggler"> <i data-feather="menu"></i> </a>
+      <div class="navbar-content">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown icon_wifi_ativo"> <a class="nav-link dropdown-toggle" href="javascript:void(0);"> <i data-feather="wifi" style="color: green;"></i> </a> </li>
+          <li class="nav-item dropdown icon_wifi_desativo"> <a class="nav-link dropdown-toggle" href="javascript:void(0);"> <i data-feather="wifi-off" style="color: red;"></i> </a> </li>
+          <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i data-feather="bell"></i>
+            <div class="indicator">
+              <div class="circle"></div>
+            </div>
+            </a>
+            <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown">
+              <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
+                <p>6 New Notifications</p>
+                <a href="javascript:;" class="text-muted">Clear all</a> </div>
+              <div class="p-1"> <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3"> <i class="icon-sm text-white" data-feather="gift"></i> </div>
+                <div class="flex-grow-1 me-2">
+                  <p>New Order Recieved</p>
+                  <p class="tx-12 text-muted">30 min ago</p>
+                </div>
+                </a> <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3"> <i class="icon-sm text-white" data-feather="alert-circle"></i> </div>
+                <div class="flex-grow-1 me-2">
+                  <p>Server Limit Reached!</p>
+                  <p class="tx-12 text-muted">1 hrs ago</p>
+                </div>
+                </a> <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3"> <img class="wd-30 ht-30 rounded-circle" src="assets/images/faces/face6.jpg" alt="userr"> </div>
+                <div class="flex-grow-1 me-2">
+                  <p>New customer registered</p>
+                  <p class="tx-12 text-muted">2 sec ago</p>
+                </div>
+                </a> <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3"> <i class="icon-sm text-white" data-feather="layers"></i> </div>
+                <div class="flex-grow-1 me-2">
+                  <p>Apps are ready for update</p>
+                  <p class="tx-12 text-muted">5 hrs ago</p>
+                </div>
+                </a> <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3"> <i class="icon-sm text-white" data-feather="download"></i> </div>
+                <div class="flex-grow-1 me-2">
+                  <p>Download completed</p>
+                  <p class="tx-12 text-muted">6 hrs ago</p>
+                </div>
+                </a> </div>
+              <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top"> <a href="javascript:;">View all</a> </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- partial -->
+    
+    <div class="page-content">
+      <div class="row">
+        <div class="col-12 col-xl-12 stretch-card">
+          <div class="row flex-grow-1">
+            
+			<div class="col-md-12 grid-margin stretch-card">
+				<div class="card">
+					<div class="card-body">
+						<div class=""> 
+							<div class="row">
+        						<div class="col-md-6 col-6 text-center"> 
+									<img style="max-height: 100px;" src="img/logo.png">
+								</div>
+								<div class="col-md-6 col-6 text-center"> 
+									<img style="max-height: 100px;" src="img/bom_conselho.jpg">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<style>
+					.form-label{
+						font-weight: bold;
+					}
+					@font-face {
+						font-family: myFirstFont;
+						src: url("font/DS-DIGI.ttf");
+					}
+					.tempo_inicio{
+						font-family: myFirstFont;
+						width: 100%;
+						height: 100%;
+						position: fixed;
+						top: 0;
+						background: #ddddddbf;
+						padding: 10% 0;
+						font-weight: bold;
+						font-size: 40px;
+						text-align: center;
+						z-index: 999;
+					}
+					.error_valid{
+						border-color: red !important;
+					}
+			</style>
+			  <div class="col-md-12 grid-margin stretch-card">
+				<div class="card">
+					<div class="card-body">
+						
+						<div class="mb-3">
+							<label class="form-label">Ano</label>
+							<select class="form-select lista_ano_escolar" onChange="set_ano(this.value);">
+								<option value="-1">BUSCANDO</option>								
+							</select>
+						</div>
+						
+						<div class="mb-3">
+							<label class="form-label">Escola</label>
+							<select class="form-select lista_escola" onChange="set_escola()">
+								<option value="-1">BUSCANDO</option>
+								
+							</select>
+						</div>
+						
+						<div class="mb-3">
+							<label class="form-label">Turma</label>
+							<select class="form-select lista_turma" onChange="set_turma();">
+								<option value="-1">BUSCANDO</option>
+							</select>
+						</div>
+						
+						<div class="mb-3">
+							<label class="form-label">Estudante</label>
+							<select class="form-select lista_estudante" onChange="set_estudante();">
+								<option value="-1">BUSCANDO</option>
+							</select>
+						</div>
+						
+						<div class="mb-3">
+							<label class="form-label">Horário da Prova</label>
+							<input type="datetime-local" class="form-control horario_prova">								
+						</div>
+						
+						<div class="mb-3 d-grid gap-2">
+							<button class="btn btn-primary" onClick="habilitar_estudante();">Habilitar Estudante</button>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			  
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- modal -->
+	  
+	<div class="modal fade modal_liberar_acesso" tabindex="-1" style="display: none;" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Liberação de Acesso</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="card">
+						<div class="card-body">
+
+							
+
+							<div class="mb-3">
+								<label class="form-label">Senha de Acesso</label>
+								<input type="password" class="form-control senha_liberacao">								
+							</div>
+
+							
+
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-primary" onClick="validar_senha_liberar_acesso();">Liberar Acesso</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	  
+    <!-- partial:partials/_footer.html -->
+    <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small">
+      <p class="text-muted mb-1 mb-md-0">SAE - Sistema de Avaliação Educacional.</p>
+      <p class="text-muted">SICAP Soluções</p>
+    </footer>
+    <!-- partial --> 
+    
+  </div>
+</div>
+<div class="cont_toast"> </div>
+<script src="cordova.js"></script> 
+<script src="js/index.js"></script> 
+<!-- core:js --> 
+<script src="assets/vendors/core/core.js"></script> 
+<!-- endinject --> 
+
+<!-- Plugin js for this page --> 
+<script src="assets/vendors/flatpickr/flatpickr.min.js"></script> 
+<script src="assets/vendors/apexcharts/apexcharts.min.js"></script> 
+<!-- End plugin js for this page --> 
+
+<!-- inject:js --> 
+<script src="assets/vendors/feather-icons/feather.min.js"></script> 
+<script src="assets/js/template.js"></script> 
+<!-- endinject --> 
+
+<!-- Custom js for this page --> 
+<script src="assets/js/dashboard-light.js"></script> 
+<!-- End custom js for this page --> 
+<script src="assets2/js/functions.js"></script> 
+<script src="assets2/js/index.js"></script>
+</body>
+</html>

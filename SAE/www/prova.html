@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="Responsive HTML Admin Dashboard Template based on Bootstrap 5">
+<meta name="author" content="NobleUI">
+<meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+<title>SICAP - SAE</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
+<!-- End fonts --> 
+
+<!-- core:css -->
+<link rel="stylesheet" href="assets/vendors/core/core.css">
+<!-- endinject --> 
+
+<!-- Plugin css for this page -->
+<link rel="stylesheet" href="assets/vendors/flatpickr/flatpickr.min.css">
+<!-- End plugin css for this page --> 
+
+<!-- inject:css -->
+<link rel="stylesheet" href="assets/fonts/feather-font/css/iconfont.css">
+<link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css">
+<!-- endinject --> 
+
+<!-- Layout styles -->
+<link rel="stylesheet" href="assets/css/demo1/style.min.css">
+<!-- End layout styles -->
+
+<link rel="shortcut icon" href="assets/images/favicon.png" />
+	<style>
+		.btn_lock_2{
+			display: flex;
+			height: 100%;
+			border-right: 1px solid #e9ecef;
+			align-items: center;
+			padding: 0 25px;
+		}
+		.btn_lock_2 svg{
+			width: 20px;
+			height: 20px;
+			color: #7987a1;
+		}
+		.cont_aba_relogio{
+			background: #fff;
+			position: fixed;
+			right: 0;
+			top: 10%;
+			height: 42px;
+			width: 42px;
+			border: 1px solid #fdfdfd;
+			text-align: center;
+			box-shadow: -3px 0 10px 0 rgb(183 192 206 / 20%);
+		}
+		.cont_aba_relogio svg{
+			margin: 0;
+			color: #7987a1;
+		}
+		.cont_aba_gabarito{
+			background: #fff;
+			position: fixed;
+			right: 0;
+			top: 26%;
+			height: 42px;
+			width: 42px;
+			border: 1px solid #fdfdfd;
+			text-align: center;
+			box-shadow: -3px 0 10px 0 rgb(183 192 206 / 20%);
+		}
+		.cont_aba_gabarito svg{
+			margin: 0;
+			color: #7987a1;
+		}
+		.cont_aba_gabarito_ativo{
+			right: 230px;
+			z-index: 9999;
+		}
+		.cont_aba_relogio2{
+			position: fixed;
+			right: 0;
+			top: 10%;
+			background: #fff;
+			width: 230px;
+			height: 200px;
+			box-shadow: 7px 3px 6px #b9b9b9;
+			border: 1px solid #fdfdfd;
+			z-index: 9999;
+		}
+		.cont_aba_gabarito2{
+			position: fixed;
+			right: 0;
+			top: 26%;
+			background: #fff;
+			width: 230px;
+			height: 200px;
+			box-shadow: 7px 3px 6px #b9b9b9;
+			border: 1px solid #fdfdfd;
+			z-index: 9999;	
+		}
+		.cont_backgroud{
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, .3);
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			z-index: 999;
+		}
+	</style>
+</head>
+<body class="sidebar-dark">
+<div class="main-wrapper">
+  <nav class="sidebar">
+    <div class="sidebar-header"> <a href="javascript:void(0);" class="sidebar-brand"> SICAP <span>SAE</span> </a>
+      <div class="sidebar-toggler not-active"> <span></span> <span></span> <span></span> </div>
+    </div>
+    <div class="sidebar-body">
+      <ul class="nav">
+        <li class="nav-item nav-category">Menu</li>
+        <li class="nav-item"> 
+			<a href="index.html" class="nav-link"> 
+				<i class="link-icon" data-feather="box"></i> 
+				<span class="link-title">Tela Inicial</span> 
+			</a> 
+		</li>
+        <li class="nav-item nav-category">Configurações</li>
+		<li class="nav-item"> 
+			<a href="javascript:void(0);" class="nav-link"> 
+				<i class="me-2 link-icon" data-feather="upload-cloud"></i> 
+				<span class="link-title">Sicronização</span> 
+			</a> 
+		</li>
+        <li class="nav-item"> 
+			<a href="javascript:void(0);" class="nav-link"> 
+				<i class="me-2 link-icon" data-feather="user"></i> 
+				<span class="link-title">Perfil</span> 
+			</a> 
+		</li>
+        <li class="nav-item"> 
+			<a href="javascript:void(0);" onClick="trocar_estudante();" class="nav-link"> 
+				<i class="me-2 link-icon" data-feather="repeat"></i> 
+				<span class="link-title">Trocar de Estudante</span> 
+			</a> 
+		</li>
+        <li class="nav-item"> <a onClick="sair_app();" href="javascript:void(0);" class="nav-link"> <i class="me-2 link-icon" data-feather="log-out"></i> <span class="link-title">Sair da conta</span> </a> </li>
+      </ul>
+    </div>
+  </nav>
+  <nav class="settings-sidebar">
+    <div class="sidebar-body lista_cadernos_prova"> 
+		<a href="javascript:void(0);" class="settings-sidebar-toggler"> 
+			<i data-feather="grid"></i> 
+		</a>
+      <h6 class="text-muted mb-2">Cadernos de Avaliação</h6>
+      <div class="mb-3 border-bottom"> </div>
+      <div class="theme-wrapper" style=" overflow: auto; height: 400px; ">
+		
+      </div>
+    </div>
+  </nav>
+	
+  <!-- partial -->
+  
+  <div class="page-wrapper">
+    <nav class="navbar"> <a href="javascript:void(0);" class="sidebar-toggler"> <i data-feather="menu"></i> </a>
+      <div class="navbar-content">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown icon_wifi_ativo"> <a class="nav-link dropdown-toggle" href="javascript:void(0);"> <i data-feather="wifi" style="color: green;"></i> </a> </li>
+          <li class="nav-item dropdown icon_wifi_desativo"> <a class="nav-link dropdown-toggle" href="javascript:void(0);"> <i data-feather="wifi-off" style="color: red;"></i> </a> </li>
+          <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i data-feather="bell"></i>
+            <div class="indicator">
+              <div class="circle"></div>
+            </div>
+            </a>
+            <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown">
+              <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
+                <p>6 New Notifications</p>
+                <a href="javascript:;" class="text-muted">Clear all</a> </div>
+              <div class="p-1"> <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3"> <i class="icon-sm text-white" data-feather="gift"></i> </div>
+                <div class="flex-grow-1 me-2">
+                  <p>New Order Recieved</p>
+                  <p class="tx-12 text-muted">30 min ago</p>
+                </div>
+                </a> <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3"> <i class="icon-sm text-white" data-feather="alert-circle"></i> </div>
+                <div class="flex-grow-1 me-2">
+                  <p>Server Limit Reached!</p>
+                  <p class="tx-12 text-muted">1 hrs ago</p>
+                </div>
+                </a> <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3"> <img class="wd-30 ht-30 rounded-circle" src="assets/images/faces/face6.jpg" alt="userr"> </div>
+                <div class="flex-grow-1 me-2">
+                  <p>New customer registered</p>
+                  <p class="tx-12 text-muted">2 sec ago</p>
+                </div>
+                </a> <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3"> <i class="icon-sm text-white" data-feather="layers"></i> </div>
+                <div class="flex-grow-1 me-2">
+                  <p>Apps are ready for update</p>
+                  <p class="tx-12 text-muted">5 hrs ago</p>
+                </div>
+                </a> <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3"> <i class="icon-sm text-white" data-feather="download"></i> </div>
+                <div class="flex-grow-1 me-2">
+                  <p>Download completed</p>
+                  <p class="tx-12 text-muted">6 hrs ago</p>
+                </div>
+                </a> </div>
+              <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top"> <a href="javascript:;">View all</a> </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- partial -->
+    
+    <div class="page-content">
+      <div class="row">
+        <div class="col-12 col-xl-12 stretch-card">
+          <div class="row flex-grow-1">
+            
+			<div class="col-md-12 grid-margin stretch-card">
+				<div class="card">
+					<div class="card-body">
+						<div class="cont_pergunta"></div>
+						pergunta
+					</div>
+				</div>
+			</div>
+			
+			  <div class="col-md-12 grid-margin stretch-card">
+				<div class="card">
+					<div class="card-body lista_alternativas">				
+											
+						
+						
+					</div>
+				</div>
+			</div>
+			  
+			  
+			  <div class="col-12 grid-margin stretch-card">
+				<div class="card">
+					<div class="card-body qtd_questoes">				
+											
+						<div class="row flex-grow-1">
+							<div class="col-4">
+								<button class="btn btn-primary text-white fw-bolder btn-icon-text" style=" width: 38px; height: 38px; padding: 6px;" onClick="seta_questao('-');">
+									<i data-feather="arrow-left"></i>
+								</button>
+							</div>
+							<div class="col-4">
+								<select class="form-select qtd_questoes_select" onChange="set_lista_questao_atual();">
+									<option value="-1">-</option>
+								</select>
+							</div>
+							<div class="col-4" style="text-align: right">
+								<button class="btn btn-primary text-white fw-bolder btn-icon-text" style=" width: 38px; height: 38px; padding: 6px;" onClick="seta_questao('+');">
+									<i data-feather="arrow-right"></i>
+								</button>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			  
+			  
+          </div>
+        </div>
+      </div>
+    </div>
+   
+	  <!-- modal -->
+	  
+	<div class="modal fade modal_liberar_acesso" tabindex="-1" style="display: none;" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Liberação de Acesso</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="card">
+						<div class="card-body">
+
+							
+
+							<div class="mb-3">
+								<label class="form-label">Senha de Acesso</label>
+								<input type="password" class="form-control senha_liberacao">								
+							</div>
+
+							
+
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-primary" onClick="validar_senha_liberar_acesso();">Liberar Acesso</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	  
+    <!-- partial:partials/_footer.html -->
+    <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small">
+      <p class="text-muted mb-1 mb-md-0">SAE - Sistema de Avaliação Educacional.</p>
+      <p class="text-muted">SICAP Soluções</p>
+    </footer>
+    <!-- partial --> 
+    
+  </div>
+</div>
+<div class="cont_toast"> </div>
+<script src="cordova.js"></script> 
+<script src="js/index.js"></script> 
+<!-- core:js --> 
+<script src="assets/vendors/core/core.js"></script> 
+<!-- endinject --> 
+
+<!-- Plugin js for this page --> 
+<script src="assets/vendors/flatpickr/flatpickr.min.js"></script> 
+<script src="assets/vendors/apexcharts/apexcharts.min.js"></script> 
+<!-- End plugin js for this page --> 
+
+<!-- inject:js --> 
+<script src="assets/vendors/feather-icons/feather.min.js"></script> 
+<script src="assets/js/template.js"></script> 
+<!-- endinject --> 
+
+<!-- Custom js for this page --> 
+<script src="assets/js/dashboard-light.js"></script> 
+<!-- End custom js for this page --> 
+<script src="assets2/js/functions.js"></script> 
+<script src="assets2/js/prova.js"></script>
+</body>
+</html>
