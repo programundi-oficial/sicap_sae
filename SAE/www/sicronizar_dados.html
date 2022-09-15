@@ -78,7 +78,11 @@
       </ul>
     </div>
   </nav>
-  
+<style>
+	.table td, .table th {
+		white-space: initial !important; 
+	}	
+</style>
   <!-- partial -->
   
   <div class="page-wrapper">
@@ -149,79 +153,24 @@
 									<img style="max-height: 100px;" src="img/logo.png">
 								</div>
 								<div class="col-md-6 col-6 text-center"> 
-									<img style="max-height: 100px;" class="img_cliente" src="">
+									<img style="max-height: 100px;" src="img/bom_conselho.jpg">
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<style>
-					.form-label{
-						font-weight: bold;
-					}
-					@font-face {
-						font-family: myFirstFont;
-						src: url("font/DS-DIGI.ttf");
-					}
-					.tempo_inicio{
-						font-family: myFirstFont;
-						width: 100%;
-						height: 100%;
-						position: fixed;
-						top: 0;
-						background: #ddddddbf;
-						padding: 10% 0;
-						font-weight: bold;
-						font-size: 40px;
-						text-align: center;
-						z-index: 999;
-					}
-					.error_valid{
-						border-color: red !important;
-					}
-			</style>
+			
 			  <div class="col-md-12 grid-margin stretch-card">
 				<div class="card">
 					<div class="card-body">
 						
-						<div class="mb-3">
-							<label class="form-label">Ano</label>
-							<select class="form-select lista_ano_escolar" onChange="set_ano(this.value);">
-								<option value="-1">BUSCANDO</option>								
-							</select>
-						</div>
+						<table class="table table-bordered mb-3">
+							<tbody class="lista_alunos_respondeu"></tbody>
+						</table>
 						
-						<div class="mb-3">
-							<label class="form-label">Escola</label>
-							<select class="form-select lista_escola" onChange="set_escola()">
-								<option value="-1">BUSCANDO</option>
-								
-							</select>
-						</div>
-						
-						<div class="mb-3">
-							<label class="form-label">Turma</label>
-							<select class="form-select lista_turma" onChange="set_turma();">
-								<option value="-1">BUSCANDO</option>
-							</select>
-						</div>
-						
-						<div class="mb-3">
-							<label class="form-label">Estudante</label>
-							<select class="form-select lista_estudante" onChange="set_estudante();">
-								<option value="-1">BUSCANDO</option>
-							</select>
-						</div>
-						
-						<div class="mb-3">
-							<label class="form-label">Horário da Prova</label>
-							<input type="datetime-local" class="form-control horario_prova">								
-						</div>
-						
-						<div class="mb-3 d-grid gap-2">
-							<input type="hidden" class="id_cliente" value="-1">
-							<button class="btn btn-primary" onClick="habilitar_estudante();">Habilitar Estudante</button>
+						<div class=" d-grid gap-2">
+							<button class="btn btn-success" onClick="sicronizar_dados_prova();">Sincronizar</button>
 						</div>
 						
 					</div>
@@ -295,6 +244,6 @@
 <script src="assets/js/dashboard-light.js"></script> 
 <!-- End custom js for this page --> 
 <script src="assets2/js/functions.js"></script> 
-<script src="assets2/js/index.js"></script>
+<script src="assets2/js/sicronizar_dados.js"></script>
 </body>
 </html>

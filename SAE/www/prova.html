@@ -52,11 +52,11 @@
 			position: fixed;
 			right: 0;
 			top: 10%;
-			height: 42px;
-			width: 42px;
-			border: 1px solid #fdfdfd;
+			height: 56px;
+			width: 56px;
+			border: 1px solid #b3b3b3;
 			text-align: center;
-			box-shadow: -3px 0 10px 0 rgb(183 192 206 / 20%);
+			box-shadow: 5px 3px 6px #9f9f9f;
 		}
 		.cont_aba_relogio svg{
 			margin: 0;
@@ -66,20 +66,43 @@
 			background: #fff;
 			position: fixed;
 			right: 0;
-			top: 26%;
-			height: 42px;
-			width: 42px;
-			border: 1px solid #fdfdfd;
+			top: calc(10% + 152px);
+			height: 56px;
+			width: 56px;
+			border: 1px solid #b3b3b3;
 			text-align: center;
-			box-shadow: -3px 0 10px 0 rgb(183 192 206 / 20%);
+			box-shadow: 5px 3px 6px #9f9f9f;
 		}
-		.cont_aba_gabarito svg{
+		.cont_aba_gabarito svg, .cont_aba_caderno svg{
 			margin: 0;
 			color: #7987a1;
 		}
-		.cont_aba_gabarito_ativo{
-			right: 230px;
+		.cont_aba_gabarito_ativo, .cont_aba_caderno_ativo{
+			right: 229px !important;
 			z-index: 9999;
+		}
+		.cont_aba_caderno{
+			background: #fff;
+			position: fixed;
+			right: 0;
+			top: calc(10% + 76px);
+			height: 56px;
+			width: 56px;
+			border: 1px solid #b3b3b3;
+			text-align: center;
+			box-shadow: 5px 3px 6px #9f9f9f;
+		}
+		.cont_aba_caderno2{
+			position: fixed;
+			right: 0;
+			top: calc(10% + 76px);
+			background: #fff;
+			width: 230px;
+			max-height: 70%;
+			box-shadow: 7px 3px 6px #b9b9b9;
+			border: 1px solid #b3b3b3;
+			z-index: 9999;
+			padding-bottom: 0 !important;
 		}
 		.cont_aba_relogio2{
 			position: fixed;
@@ -87,20 +110,20 @@
 			top: 10%;
 			background: #fff;
 			width: 230px;
-			height: 200px;
+			max-height: 70%;
 			box-shadow: 7px 3px 6px #b9b9b9;
-			border: 1px solid #fdfdfd;
+			border: 1px solid #b3b3b3;
 			z-index: 9999;
 		}
 		.cont_aba_gabarito2{
 			position: fixed;
 			right: 0;
-			top: 26%;
+			top: calc(10% + 152px);
 			background: #fff;
 			width: 230px;
-			height: 200px;
+			max-height: 70%;			
 			box-shadow: 7px 3px 6px #b9b9b9;
-			border: 1px solid #fdfdfd;
+			border: 1px solid #b3b3b3;
 			z-index: 9999;	
 		}
 		.cont_backgroud{
@@ -111,6 +134,28 @@
 			top: 0;
 			bottom: 0;
 			z-index: 999;
+		}
+		.cont_pergunta img{
+			max-width: 100% !important;
+			height: initial !important;
+			border-radius: initial !important;
+		}
+		.cont_pergunta td{
+			white-space: initial !important;	
+		}
+		.lista_cadernos_prova .theme-wrapper a{
+			position: relative;
+			display: block;
+			margin-bottom: 0;
+			border-radius: 6px;
+			border: 3px solid #e9ecef;
+		}
+		.lista_cadernos_prova .theme-wrapper .active{
+			border: 3px solid #b2b8ff !important;
+		}
+		.lista_cadernos_prova .theme-wrapper a img{
+			width: 100%;
+    		border-radius: 3px;
 		}
 	</style>
 </head>
@@ -152,18 +197,7 @@
       </ul>
     </div>
   </nav>
-  <nav class="settings-sidebar">
-    <div class="sidebar-body lista_cadernos_prova"> 
-		<a href="javascript:void(0);" class="settings-sidebar-toggler"> 
-			<i data-feather="grid"></i> 
-		</a>
-      <h6 class="text-muted mb-2">Cadernos de Avaliação</h6>
-      <div class="mb-3 border-bottom"> </div>
-      <div class="theme-wrapper" style=" overflow: auto; height: 400px; ">
-		
-      </div>
-    </div>
-  </nav>
+  
 	
   <!-- partial -->
   
@@ -173,7 +207,7 @@
         <ul class="navbar-nav">
           <li class="nav-item dropdown icon_wifi_ativo"> <a class="nav-link dropdown-toggle" href="javascript:void(0);"> <i data-feather="wifi" style="color: green;"></i> </a> </li>
           <li class="nav-item dropdown icon_wifi_desativo"> <a class="nav-link dropdown-toggle" href="javascript:void(0);"> <i data-feather="wifi-off" style="color: red;"></i> </a> </li>
-          <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i data-feather="bell"></i>
+          <li class="nav-item dropdown icon_sino"> <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i data-feather="bell"></i>
             <div class="indicator">
               <div class="circle"></div>
             </div>
@@ -224,20 +258,19 @@
     <div class="page-content">
       <div class="row">
         <div class="col-12 col-xl-12 stretch-card">
-          <div class="row flex-grow-1">
+          <div class="row flex-grow-1" style=" width: 100%; overflow: auto; ">
             
 			<div class="col-md-12 grid-margin stretch-card">
 				<div class="card">
 					<div class="card-body">
-						<div class="cont_pergunta"></div>
-						pergunta
+						<div class="cont_pergunta" style="width: 100%;overflow: auto;"></div>						
 					</div>
 				</div>
 			</div>
 			
 			  <div class="col-md-12 grid-margin stretch-card">
 				<div class="card">
-					<div class="card-body lista_alternativas">				
+					<div class="card-body lista_alternativas" style="padding-bottom: 0">				
 											
 						
 						

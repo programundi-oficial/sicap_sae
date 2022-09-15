@@ -253,7 +253,40 @@ function pasta_isexiste($pasta){
 
 
 
-
+function get_conexao_cliente($id_cliente){
+	try {
+        $conect = $GLOBALS['pdo_staf'];
+        $conect->beginTransaction();
+						
+        $consulta = $conect->prepare(
+		"SELECT
+		'pgsql:host='||s.host_servidor_banco||' dbname='||s.dbname_servidor_banco||' port='||s.port_servidor_banco||' user='||user_servidor_banco||' password='||s.password_servidor_banco as conexao
+		FROM sistemas_clientes s		
+		WHERE 1=1
+		AND s.id_clientes 	= :id_clientes	
+		AND s.id_sistemas 	= 4
+		AND s.is_bloqueado 	= FALSE"
+        );		
+		$consulta->bindParam( ":id_clientes", $id_cliente, PDO::PARAM_STR );		
+        $consulta->execute();
+		$sistemas_clientes = $consulta->fetch( PDO::FETCH_ASSOC );
+				
+		if($sistemas_clientes["conexao"] == null){
+			$conect->rollBack();        
+        	return "false";
+		}
+				
+								
+		$conect->commit();
+		
+								
+		return $sistemas_clientes["conexao"];
+    } 
+	catch (Exception $e) {
+        $conect->rollBack();        
+        return "false";
+    }
+}
 
 
 ?>

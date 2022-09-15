@@ -21,7 +21,7 @@ function listar_serie(){
 			for (var i2 = 0; i2 < dados[i].lista_p.length; i2++) {			
 				
 				$(".lista_ano_escolar").append("<option value='"+dados[i].lista_p[i2].id_serie_anoletivo+"'>"+dados[i].lista_p[i2].serie_anoletivo+"</option>");							
-				
+				$(".id_cliente").val(dados[i].lista_p[i2].id_cliente);
 			}
 			
 		}
@@ -259,6 +259,7 @@ function habilitar_estudante(){
 	let desc_estudante		= $(".lista_estudante option:selected").text();
 	
 	let horario_prova		= $(".horario_prova").val();
+	let id_cliente			= $(".id_cliente").val();
 	
 	if(parseInt(id_ano_escolar) == parseInt("-1")){
 		chamar_toast("Selecione o Ano", "danger"); 
@@ -298,22 +299,24 @@ function habilitar_estudante(){
 	localStorage.setItem("dados_estudante_prova", "[]");
 	let dados_estudante 	= localStorage.getItem("dados_estudante_prova");
 	
-	let dados 			= JSON.parse(dados_estudante);
-	let a 				= new Object();
+	let dados 				= JSON.parse(dados_estudante);
+	let a 					= new Object();
 
-	a.id_ano_escolar 	= id_ano_escolar;
-	a.desc_ano_escolar 	= desc_ano_escolar;
+	a.id_ano_escolar 		= id_ano_escolar;
+	a.desc_ano_escolar 		= desc_ano_escolar;
 
-	a.id_escola 		= id_escola;
-	a.desc_escola 		= desc_escola;
+	a.id_escola 			= id_escola;
+	a.desc_escola 			= desc_escola;
 
-	a.id_turma 			= id_turma;
-	a.desc_turma 		= desc_turma;
+	a.id_turma 				= id_turma;
+	a.desc_turma 			= desc_turma;
 
-	a.id_estudante 		= id_estudante;
-	a.desc_estudante 	= desc_estudante;
+	a.id_estudante 			= id_estudante;
+	a.desc_estudante 		= desc_estudante;
 
-	a.horario_prova		= horario_prova;
+	a.horario_prova			= horario_prova;
+	
+	a.id_cliente			= id_cliente;
 
 	dados.push(a);
 
@@ -323,6 +326,7 @@ function habilitar_estudante(){
 }
 
 function abrir_prova(){
+	localStorage.setItem("prova_ativa", "true");
 	location.href = "prova.html";
 }
 
@@ -385,6 +389,35 @@ request.onsuccess = () => {
     }
 }
 
-get_estudante_prova_atual();
+function valid_prova_aberta(){
+	let prova_ativa 	= localStorage.getItem("prova_ativa");
+	
+	if(prova_ativa == null){	
+		get_estudante_prova_atual();
+		verificar_versao_app();
+		return;
+	}
+	
+	if(prova_ativa == "true"){
+	   location.href = "prova.html";
+	}
+}
 
-verificar_versao_app();
+function valid_logado(){
+	let dados_al 	= localStorage.getItem("dados_al");
+	
+	if(dados_al !== null){				
+		return;
+	}
+	
+	if(dados_al == null){	
+		window.indexedDB.deleteDatabase('offline');
+		location.href = "login.html";
+		return;
+	}
+}
+
+$(".img_cliente").attr("src", localStorage.getItem("logo_cliente"));
+
+valid_logado();
+valid_prova_aberta();

@@ -1781,7 +1781,7 @@ progress {
   color: #000;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #e9ecef;
+  border: 1px solid #838383 !important;
   appearance: none;
   border-radius: .25rem;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
@@ -1921,7 +1921,7 @@ textarea.form-control-lg {
   background-repeat: no-repeat;
   background-position: right .8rem center;
   background-size: 16px 12px;
-  border: 1px solid #e9ecef;
+  border: 1px solid #838383 !important;
   border-radius: .25rem;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
   appearance: none
@@ -17729,7 +17729,7 @@ body {
 }
 .main-wrapper .page-wrapper {
   min-height: 100vh;
-  background: #f9fafb;
+  background: #d7d7d7;
   width: calc(100% - 240px);
   margin-left: 240px;
   display: flex;
@@ -20500,9 +20500,9 @@ div.tox .tox-dialog__body {
 
 .cont_toast{
 	position: fixed;
-    bottom: 10px;
+    bottom: 60px;
     left: 16px;
     z-index: 9999;
-    background: #fff;
+   
 }
 .vertical_alinha{position:relative;top:50%;transform:translateY(-50%);-o-transform:translateY(-50%);-moz-transform:translateY(-50%);-ms-transform:translateY(-50%);-webkit-transform:translateY(-50%)}

@@ -1,6 +1,32 @@
 var controller_login = "loginController.php";
 
-window.indexedDB.deleteDatabase('offline');
+
+
+function valid_prova_aberta(){
+	let prova_ativa 	= localStorage.getItem("prova_ativa");
+	
+	if(prova_ativa == null){
+		location.href = "index.html";
+	}
+	
+	if(prova_ativa == "true"){
+	   location.href = "prova.html";
+	}
+}
+
+function valid_logado(){
+	let dados_al 	= localStorage.getItem("dados_al");
+	
+	if(dados_al !== null){	
+		valid_prova_aberta();		
+		return;
+	}
+	
+	if(dados_al == null){	
+		window.indexedDB.deleteDatabase('offline');
+		return;
+	}
+}
 
 function login_p1(){
 	
@@ -77,7 +103,7 @@ function listar_municipio_login(ano_letivo){
 				   
 					if(municipio_loop !== lista_acesso[i].lista_p[i2].nome_cliente){
 
-						$(".municipio_p").append("<option value='"+lista_acesso[i].lista_p[i2].id_cliente+"'>"+lista_acesso[i].lista_p[i2].nome_cliente+"</option>");
+						$(".municipio_p").append("<option img='"+lista_acesso[i].lista_p[i2].img_logo+"' value='"+lista_acesso[i].lista_p[i2].id_cliente+"'>"+lista_acesso[i].lista_p[i2].nome_cliente+"</option>");
 
 						municipio_loop = lista_acesso[i].lista_p[i2].nome_cliente;
 
@@ -179,7 +205,7 @@ function baixar_dados_avaliacao2(){
 						
 						//localStorage.setItem("dados_av", dados_json);
 						chamar_toast("DADOS DE AVALIAÇÃO BAIXADOS COM SUCESSO", "success");					
-						get_dados_todos_alunos();
+						//get_dados_todos_alunos();
 
 					} 
 					if (json[i].result == "false") {
@@ -201,9 +227,10 @@ function baixar_dados_avaliacao(){
 	$(".btn_bd").attr("disabled", true);
 	
 	let is_internet 	= is_connection();
-	let ano_letivo_p 	= $(".ano_letivo_p").val();	
-	let id_municipio 	= $(".municipio_p").val();	
-	let id_avaliacao 	= $(".avaliacao_p").val();	
+	let ano_letivo_p 	= $(".ano_letivo_p option:selected").val();	
+	let id_municipio 	= $(".municipio_p option:selected").val();	
+	let id_avaliacao 	= $(".avaliacao_p option:selected").val();	
+	let img_municipio 	= $(".municipio_p option:selected").attr("img");
 	
 	if(is_internet == "true"){
 	   
@@ -226,6 +253,7 @@ function baixar_dados_avaliacao(){
 					if (json[i].result == "true") {
 						dados_json = JSON.stringify(json, null, 0);
 						localStorage.setItem("dados_al", dados_json);
+						localStorage.setItem("logo_cliente", img_municipio);
 						baixar_dados_avaliacao2();
 						
 
@@ -267,3 +295,8 @@ function cadastrarRegistro(tabela, dados) {
 		},500);
 	}
 }
+
+valid_logado();
+
+$(".login_p").val("");
+$(".senha_p").val("");

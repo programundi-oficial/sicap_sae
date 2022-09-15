@@ -8,8 +8,10 @@ function chamar_toast(texto_alerta, tipo){
 	let cod_toast = (data_hora.getDay()+""+data_hora.getHours()+""+data_hora.getMinutes()+""+data_hora.getSeconds());
 		
 	$(".cont_toast").append(`
-		<div class="cont_${cod_toast} alert alert-${tipo}" role="alert">
-			${texto_alerta}
+		<div style=" background: #fff; ">
+			<div class="cont_${cod_toast} alert alert-${tipo}" role="alert">
+				${texto_alerta}
+			</div>
 		</div>
 	`);
 	setTimeout(function (){
@@ -106,9 +108,24 @@ function is_connection(){
 }
 
 function sair_app(){
+	
+	let is_internet = is_connection();
+	
+	if(is_internet == "false"){
+		alert("Opção de sair necessita de acesso a internet");
+		return;	
+	}
+	
+	let r = confirm("Deseja Realmente sair do SAE ?");
+
+	if (r == false) {
+		return;
+	}
+	
+	localStorage.removeItem("dados_al");
 	location.href = "login.html";
 }
-
+$(".icon_sino").remove();
 checkConnection();
 setInterval(checkConnection, 5000);
 

@@ -1,5 +1,14 @@
 <?php
 
+function converte_img_base64($path){	
+	if($path == ""){
+		return "";
+	}
+	$type = pathinfo($path, PATHINFO_EXTENSION);
+	$data = file_get_contents($path);
+	return 'data:image/' . $type . ';base64,' . base64_encode($data);
+}
+
 function validar_login($dados) {
     try {
         $conect = $GLOBALS['pdo_staf'];
@@ -28,7 +37,8 @@ function validar_login($dados) {
 		DISTINCT
 		usc.ano_letivo,
 		c.id_cliente,
-		c.nome_cliente
+		c.nome_cliente,
+		c.img_logo
 		FROM usuarios_sistemas_clientes usc
 		JOIN usuarios u on u.id_usuario=usc.id_usuario
 		JOIN clientes c on c.id_cliente=usc.id_cliente		
@@ -45,7 +55,13 @@ function validar_login($dados) {
         $consulta->execute();
 		
 		while ( $linha = $consulta->fetch( PDO::FETCH_ASSOC ) ) {
-			$vetor[] = ( $linha );			
+			//$vetor[] = ( $linha );			
+			$vetor[] = array(
+				'id_cliente'			=> $linha['id_cliente'],
+				'ano_letivo'     		=> $linha['ano_letivo'],
+				'nome_cliente'     		=> $linha['nome_cliente'],  
+				'img_logo'  			=> converte_img_base64($linha['img_logo'])
+			);
 		}
 								
 		$conect->commit();
@@ -58,41 +74,6 @@ function validar_login($dados) {
 	catch (Exception $e) {
         $conect->rollBack();        
         return return_erro($e->getMessage());
-    }
-}
-
-function get_conexao_cliente($id_cliente){
-	try {
-        $conect = $GLOBALS['pdo_staf'];
-        $conect->beginTransaction();
-						
-        $consulta = $conect->prepare(
-		"SELECT
-		'pgsql:host='||s.host_servidor_banco||' dbname='||s.dbname_servidor_banco||' port='||s.port_servidor_banco||' user='||user_servidor_banco||' password='||s.password_servidor_banco as conexao
-		FROM sistemas_clientes s		
-		WHERE 1=1
-		AND s.id_clientes 	= :id_clientes	
-		AND s.id_sistemas 	= 4
-		AND s.is_bloqueado 	= FALSE"
-        );		
-		$consulta->bindParam( ":id_clientes", $id_cliente, PDO::PARAM_STR );		
-        $consulta->execute();
-		$sistemas_clientes = $consulta->fetch( PDO::FETCH_ASSOC );
-				
-		if($sistemas_clientes["conexao"] == null){
-			$conect->rollBack();        
-        	return "false";
-		}
-				
-								
-		$conect->commit();
-		
-								
-		return $sistemas_clientes["conexao"];
-    } 
-	catch (Exception $e) {
-        $conect->rollBack();        
-        return "false";
     }
 }
 
@@ -347,7 +328,12 @@ function gerar_dados_alunos_offline($dados) {
 		"SELECT
 		DISTINCT
 		fx.id_serie_anoletivo,
-		fx.serie_anoletivo
+		fx.serie_anoletivo,
+		(
+        	SELECT
+            ins.id_cliente
+            FROM instituicao ins
+        ) as id_cliente
 		FROM (
 			SELECT
 			sa.id_serie_anoletivo,
@@ -393,8 +379,9 @@ function gerar_dados_alunos_offline($dados) {
 		while ( $linha = $consulta->fetch( PDO::FETCH_ASSOC ) ) {
 			//$vetor[] = ( $linha );	
 			$vetor[] = array(
-				'id_serie_anoletivo'     => $linha['id_serie_anoletivo'],
-				'serie_anoletivo'     	=> $linha['serie_anoletivo'],  												
+				'id_serie_anoletivo'    => $linha['id_serie_anoletivo'],
+				'serie_anoletivo'     	=> $linha['serie_anoletivo'], 
+				'id_cliente'			=> $linha['id_cliente'],
 				'escolas'    			=> gerar_dados_alunos_escola_offline($conect, $dados["id_avaliacao"], $linha['id_serie_anoletivo'])
 			);				
 		}
