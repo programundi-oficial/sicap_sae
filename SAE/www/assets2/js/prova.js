@@ -550,6 +550,14 @@ request.onsuccess = () => {
     }
 }
 
+function set_nome_estudante(){
+	let dados_estudante 	= localStorage.getItem("dados_estudante_prova");	
+	dados_estudante 		= JSON.parse(dados_estudante);
+	
+	$(".nome_estudante p").html(dados_estudante[0].desc_estudante);
+}
+
+
 $("body > .main-wrapper > .sidebar").remove();
 $("body > .main-wrapper > .page-wrapper").css("margin-left", "0");
 $("body > .main-wrapper > .page-wrapper").css("width", "100%");
@@ -600,3 +608,5 @@ $("body").append(`
 		 
 	</div>
 `);
+
+set_nome_estudante();

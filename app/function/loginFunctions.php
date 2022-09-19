@@ -552,7 +552,13 @@ function gerar_dados_alunos_estudantes_offline($conect, $id_avaliacao, $id_serie
 		"SELECT
 		DISTINCT
 		fx.id_aluno,
-		fx.estudante
+		fx.estudante,
+		fx.matricula_aluno,
+		(
+        	SELECT
+            fd.data
+            FROM format_data(fx.dt_nascimento||'') fd
+        ) as dt_nascimento
 		FROM (
 			SELECT
 			sa.id_serie_anoletivo,
@@ -563,6 +569,7 @@ function gerar_dados_alunos_estudantes_offline($conect, $id_avaliacao, $id_serie
 			lt.desc_final as turma_,
 			m.id_aluno,
 			al.matricula as matricula_aluno,
+			p.dt_nascimento,
 			p.nome as estudante
 			FROM lista_dados_turma lt
 			JOIN matricula m 			on m.id_turma=lt.id_turma

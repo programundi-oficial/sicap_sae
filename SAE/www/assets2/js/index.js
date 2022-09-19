@@ -147,7 +147,7 @@ function set_turma(){
 									
 									for (var i5 = 0; i5 < dados[i].lista_p[i2].escolas[i3].avaliacao_turmas[i4].estudantes.length; i5++) {
 
-										$(".lista_estudante").append("<option value='"+dados[i].lista_p[i2].escolas[i3].avaliacao_turmas[i4].estudantes[i5].id_aluno+"'> "+dados[i].lista_p[i2].escolas[i3].avaliacao_turmas[i4].estudantes[i5].estudante+"</option>");
+										$(".lista_estudante").append("<option value='"+dados[i].lista_p[i2].escolas[i3].avaliacao_turmas[i4].estudantes[i5].id_aluno+"'> "+dados[i].lista_p[i2].escolas[i3].avaliacao_turmas[i4].estudantes[i5].dt_nascimento+" - "+dados[i].lista_p[i2].escolas[i3].avaliacao_turmas[i4].estudantes[i5].estudante+"</option>");
 
 									} 
 									
